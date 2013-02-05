@@ -1,4 +1,4 @@
-package com.yme.customization;
+package com.yme.customization.navbar;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;

@@ -2,15 +2,15 @@ package com.yme;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewParent;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.yme.customization.NavigationBar;
+import com.yme.customization.iNavigationBarCallback;
 
-public class SecondActivity extends Activity {
+public class SecondActivity extends Activity implements iNavigationBarCallback {
 	
 	private ListView listView;
     private NavigationBar navigationBar;
@@ -26,6 +26,23 @@ public class SecondActivity extends Activity {
         navigationBar = (NavigationBar) findViewById(R.id.navigation_bar);
 
         navigationBar.setTitleText("Hello");
+//        navigationBar.createBackButton(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//                overridePendingBackTransitionAnimation();
+//            }
+//        });
+        navigationBar.setDelegate(this);
+        navigationBar.createBackButton();
+
+        Button btn = navigationBar.createCustomButton("test lala", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        navigationBar.getRightPane().addView(btn);
 
 		String[] values = new String[] { 
 				"Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
@@ -48,10 +65,19 @@ public class SecondActivity extends Activity {
 
 	}
 
+    private void overridePendingBackTransitionAnimation() {
+        overridePendingTransition(R.anim.transition_left_in, R.anim.transition_right_out);
+    }
+
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		overridePendingTransition(R.anim.transition_left_in, R.anim.transition_right_out);
-	}
+        overridePendingBackTransitionAnimation();
+    }
 
+    @Override
+    public void onNavigationBarBackClick(Button button) {
+        finish();
+        overridePendingBackTransitionAnimation();
+    }
 }

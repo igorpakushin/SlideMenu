@@ -1,4 +1,4 @@
-package com.yme.customization.sidepanel;
+package com.yme.customization.slidemenu;
 
 import android.app.Activity;
 import android.content.Context;

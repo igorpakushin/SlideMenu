@@ -9,13 +9,13 @@ import android.widget.ListView;
 
 import com.yme.customization.navbar.INavigationBarCallback;
 import com.yme.customization.navbar.NavigationBar;
-import com.yme.customization.slidemenu.CustomHorizontalScrollView;
+import com.yme.customization.slidemenu.SlideMenuScrollView;
 
 public class SecondActivity extends Activity implements INavigationBarCallback {
 	
 	private ListView listView;
     private NavigationBar navigationBar;
-    private CustomHorizontalScrollView panesController;
+    private SlideMenuScrollView panesController;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class SecondActivity extends Activity implements INavigationBarCallback {
 
 		listView = (ListView) findViewById(R.id.list_view);
         navigationBar = (NavigationBar) findViewById(R.id.navigation_bar);
-        panesController = (CustomHorizontalScrollView) findViewById(R.id.panes_scroll_view);
+        panesController = (SlideMenuScrollView) findViewById(R.id.panes_scroll_view);
 
 //        ViewGroup secondViewContainer = (ViewGroup) findViewById(R.id.second_view_container);
 //        secondViewContainer.setLayoutParams(new LinearLayout.LayoutParams(480, LinearLayout.LayoutParams.MATCH_PARENT));

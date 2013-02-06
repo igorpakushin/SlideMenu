@@ -20,7 +20,7 @@ Example activity xml:
 =========
 
     <?xml version="1.0" encoding="utf-8"?>
-    <com.yme.customization.sidepanel.CustomHorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.yme.customization.slidemenu.CustomHorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:id="@+id/main_container">
@@ -51,7 +51,7 @@ Example activity xml:
 
         </LinearLayout>
 
-    </com.yme.customization.sidepanel.CustomHorizontalScrollView>
+    </com.yme.customization.slidemenu.CustomHorizontalScrollView>
     
 Configuration in code:
 =========
@@ -60,16 +60,17 @@ Configuration in code:
     // these are percentages for views in the scrollview:
     //      1.0 means 100% of current device screen width
     //      0.8 means 80%
+    // please note: size of this arr should match number of views you have
     float[] widths = {0.8f, 1.0f};
 
     // this forces children to size
     panesController.sizeViews(widths);
 
     // this sets current pane
-    panesController.scrollToPaneIndexInstant(1);
+    panesController.scrollToPaneIndex(1);
 
 To scroll to the desired pane with animation:
 
     int duration = 200; // miliseconds
-    panesController.scrollToPaneIndexInstant(1, duration);
+    panesController.scrollToPaneIndex(1, duration);
     

@@ -47,7 +47,7 @@ public class SecondActivity extends Activity implements INavigationBarCallback {
         panesController.sizeViews(widths);
 
         // this sets current pane
-        panesController.scrollToPaneIndexInstant(1);
+        panesController.scrollToPaneIndex(1);
     }
 
     private void initListContents() {

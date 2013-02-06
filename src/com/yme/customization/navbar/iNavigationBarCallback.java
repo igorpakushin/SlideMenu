@@ -8,6 +8,6 @@ import android.widget.Button;
  * Date: 05/02/2013
  * Time: 11:16
  */
-public interface iNavigationBarCallback {
+public interface INavigationBarCallback {
     void onNavigationBarBackClick(Button button);
 }

@@ -7,11 +7,11 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.yme.customization.navbar.INavigationBarCallback;
 import com.yme.customization.navbar.NavigationBar;
-import com.yme.customization.navbar.iNavigationBarCallback;
 import com.yme.customization.sidepanel.CustomHorizontalScrollView;
 
-public class SecondActivity extends Activity implements iNavigationBarCallback {
+public class SecondActivity extends Activity implements INavigationBarCallback {
 	
 	private ListView listView;
     private NavigationBar navigationBar;

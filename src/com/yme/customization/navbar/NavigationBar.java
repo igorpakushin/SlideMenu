@@ -17,7 +17,7 @@ public class NavigationBar extends RelativeLayout {
     private View rightPane = null;
     private TextView titleTextView = null;
     private Button backButton = null;
-    private iNavigationBarCallback delegate;
+    private INavigationBarCallback delegate;
 
     private Context context;
 
@@ -56,11 +56,11 @@ public class NavigationBar extends RelativeLayout {
 		titleTextView.setText(text);
 	}
 
-    public iNavigationBarCallback getDelegate() {
+    public INavigationBarCallback getDelegate() {
         return delegate;
     }
 
-    public void setDelegate(iNavigationBarCallback delegate) {
+    public void setDelegate(INavigationBarCallback delegate) {
         this.delegate = delegate;
     }
 

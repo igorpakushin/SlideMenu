@@ -56,7 +56,7 @@ Example activity xml:
 Configuration in code:
 =========
 
-    CustomHorizontalScrollView panesController = (CustomHorizontalScrollView) findViewById(R.id.panes_scroll_view);
+    CustomHorizontalScrollView panesController = (CustomHorizontalScrollView) findViewById(R.id.main_container);
     // these are percentages for views in the scrollview:
     //      1.0 means 100% of current device screen width
     //      0.8 means 80%

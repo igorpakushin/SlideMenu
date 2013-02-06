@@ -25,36 +25,37 @@ Example activity xml:
         android:layout_height="fill_parent" 
         android:id="@+id/panes_scroll_view">
 
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            
-            Say, your left pane contents here
-            
+                Say, your left pane contents here
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/second_view_container">
+
+                Say, your  content pane here
+
+
+            </LinearLayout>
+
         </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:id="@+id/second_view_container">
-            
-            Say, your  content pane here
-
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </com.yme.customization.sidepanel.CustomHorizontalScrollView>
     
 Configuration in code:
 =========
 
-    CustomHorizontalScrollViewpanesController = (CustomHorizontalScrollView) findViewById(R.id.panes_scroll_view);
+    CustomHorizontalScrollView panesController = (CustomHorizontalScrollView) findViewById(R.id.panes_scroll_view);
     // these are percentages for views in the scrollview:
     //      1.0 means 100% of current device screen width
     //      0.8 means 80%

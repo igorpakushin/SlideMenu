@@ -21,7 +21,7 @@ import static java.lang.Math.abs;
  * Date: 05/02/2013
  * Time: 17:40
  */
-public class CustomHorizontalScrollView extends HorizontalScrollView {
+public class SlideMenuScrollView extends HorizontalScrollView {
 
     public static final String SCROLL_VIEW_PANE_ERROR = "SCROLL_VIEW_PANE_ERROR";
     private final Context context;
@@ -32,19 +32,19 @@ public class CustomHorizontalScrollView extends HorizontalScrollView {
     private boolean hasBeingLayedOut = false;
     private boolean needCallScrollPane = false;
 
-    public CustomHorizontalScrollView(Context context) {
+    public SlideMenuScrollView(Context context) {
         super(context);
         this.context = context;
         init();
     }
 
-    public CustomHorizontalScrollView(Context context, AttributeSet attrs) {
+    public SlideMenuScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         init();
     }
 
-    public CustomHorizontalScrollView(Context context, AttributeSet attrs, int defStyle) {
+    public SlideMenuScrollView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         this.context = context;
         init();
@@ -137,7 +137,7 @@ public class CustomHorizontalScrollView extends HorizontalScrollView {
 
         // this is needed to stop the timer when it's done
         // need it final to use within the class implementation
-        final CustomHorizontalScrollView me = this;
+        final SlideMenuScrollView me = this;
 
         // start the timer
         me.animationTimer = new CountDownTimer(animDuration, animDuration/numTicks) {

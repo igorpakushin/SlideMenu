@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import com.yme.customization.navbar.INavigationBarCallback;
 import com.yme.customization.navbar.NavigationBar;
-import com.yme.customization.sidepanel.CustomHorizontalScrollView;
+import com.yme.customization.slidemenu.CustomHorizontalScrollView;
 
 public class SecondActivity extends Activity implements INavigationBarCallback {
 	

@@ -8,7 +8,7 @@ FaceBook like menu implementation
 How to use:
 =========
 
-* Put the com.yme.customization.sidepanel.CustomHorizontalScrollView.java file to the 
+* Put the com.yme.customization.slidemenu.CustomHorizontalScrollView.java file to the
 corresponding folder in your project
 * Make sure you reference it as a root in your activity layout xml file
 * Make sure the only child of this container is LinearLayout container
@@ -19,7 +19,7 @@ corresponding folder in your project
 Example activity xml:
 =========
 
-    <com.yme.customization.sidepanel.CustomHorizontalScrollView 
+    <com.yme.customization.slidemenu.CustomHorizontalScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent" 
         android:layout_height="fill_parent" 

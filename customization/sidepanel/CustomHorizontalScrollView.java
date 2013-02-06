@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
@@ -28,6 +29,8 @@ public class CustomHorizontalScrollView extends HorizontalScrollView {
     private int index;
     private CountDownTimer animationTimer;
     private ViewGroup parent;
+    private boolean hasBeingLayedOut = false;
+    private boolean needCallScrollPane = false;
 
     public CustomHorizontalScrollView(Context context) {
         super(context);
@@ -67,7 +70,6 @@ public class CustomHorizontalScrollView extends HorizontalScrollView {
     }
 
     public void sizeViews(float[] widthsArr) {
-
         parent = (ViewGroup) getChildAt(0);
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -79,41 +81,50 @@ public class CustomHorizontalScrollView extends HorizontalScrollView {
             v.setLayoutParams(new LinearLayout.LayoutParams((int)(scrWidth * widthsArr[i]), LinearLayout.LayoutParams.MATCH_PARENT));
         }
 
+        // this is needed to make sure scrolling won't be performed before view has been layed out
+        // and even though if it have, will just postpone actual animation
+        ViewTreeObserver observer = getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                hasBeingLayedOut = true;
+                if (needCallScrollPane) {
+                    scrollToPaneIndex(index);
+                    needCallScrollPane = false;
+                }
+            }
+        });
+
     }
 
-    public void scrollToPaneIndexInstant(int index) {
+    private void scrollToPaneIndexWithAnimation(int index, int duration) {
         this.index = index;
-        int widthAccumulator = 0;
+        if (hasBeingLayedOut == false) { // checking if the view is layed out already
+            needCallScrollPane = true;   // if it wasn't, remember we need to scroll to a view
+            return;                      // when it will be ready
+        }
 
-        if (index < parent.getChildCount()) {
+        int widthAccumulator = 0;
+        if (index < parent.getChildCount() && index >= 0) {
 
             // calculating positing to where to scroll
             for (int i=0; i<index; i++)
                 widthAccumulator += parent.getChildAt(i).getMeasuredWidth();
 
-            scrollTo(widthAccumulator, 0);
+            if (duration > 0) performScrollAnimation(duration, 100, widthAccumulator);
+            else scrollTo(widthAccumulator, 0);
 
         } else {
             Log.e(SCROLL_VIEW_PANE_ERROR, "Scroll pane view out of bounds");
         }
+    }
+
+    public void scrollToPaneIndex(int index) {
+        scrollToPaneIndexWithAnimation(index, 0);
     }
 
     public void scrollToPaneIndex(int index, int duration) {
-        this.index = index;
-        int widthAccumulator = 0;
-
-        if (index < parent.getChildCount()) {
-
-            // calculating positing to where to scroll
-            for (int i=0; i<index; i++)
-                widthAccumulator += parent.getChildAt(i).getMeasuredWidth();
-
-            performScrollAnimation(duration, 100, widthAccumulator);
-
-        } else {
-            Log.e(SCROLL_VIEW_PANE_ERROR, "Scroll pane view out of bounds");
-        }
-
+        scrollToPaneIndexWithAnimation(index, duration);
     }
 
     private void performScrollAnimation(final int animDuration, final int numTicks, final int scrollTo) {

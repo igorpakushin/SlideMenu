@@ -10,41 +10,42 @@ How to use:
 
 * Put the com.yme.customization.sidepanel.CustomHorizontalScrollView.java file to the 
 corresponding folder in your project
-* Make sure you reference it as a root in your activity layout xml file
-* Make sure the only child of this container is LinearLayout container
+* Make sure you reference it in your activity layout xml file
+* Make sure the only child of this container is LinearLayout container with horizontal orientation
 * Put any views you need(menu, content, whatever) inside the LinearLayout container
-* Provide the controll with views' sizes you need
+* Provide the control with views' sizes you need
 * Use corresponding methods to scroll to panes you need
 
 Example activity xml:
 =========
 
-    <com.yme.customization.sidepanel.CustomHorizontalScrollView 
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent" 
-        android:layout_height="fill_parent" 
-        android:id="@+id/panes_scroll_view">
+    <?xml version="1.0" encoding="utf-8"?>
+    <com.yme.customization.sidepanel.CustomHorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/main_container">
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                Say, your left pane contents here
-
-            </LinearLayout>
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/second_view_container">
+                android:background="#ffff0000"
+                android:orientation="vertical">
 
-                Say, your  content pane here
+                <!-- Your menu pane here -->
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ff00ff00"
+                android:orientation="vertical">
+
+                <!-- Your content pane here -->
 
             </LinearLayout>
 

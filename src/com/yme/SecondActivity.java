@@ -9,13 +9,15 @@ import android.widget.ListView;
 
 import com.yme.customization.navbar.NavigationBar;
 import com.yme.customization.navbar.iNavigationBarCallback;
+import com.yme.customization.sidepanel.CustomHorizontalScrollView;
 
 public class SecondActivity extends Activity implements iNavigationBarCallback {
 	
 	private ListView listView;
     private NavigationBar navigationBar;
+    private CustomHorizontalScrollView panesController;
 
-	@Override
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
@@ -24,7 +26,48 @@ public class SecondActivity extends Activity implements iNavigationBarCallback {
 
 		listView = (ListView) findViewById(R.id.list_view);
         navigationBar = (NavigationBar) findViewById(R.id.navigation_bar);
+        panesController = (CustomHorizontalScrollView) findViewById(R.id.panes_scroll_view);
 
+//        ViewGroup secondViewContainer = (ViewGroup) findViewById(R.id.second_view_container);
+//        secondViewContainer.setLayoutParams(new LinearLayout.LayoutParams(480, LinearLayout.LayoutParams.MATCH_PARENT));
+
+        initSidePane();
+
+        initNavigationBar();
+        initListContents();
+	}
+
+    private void initSidePane() {
+        // these are percentages for views in the scrollview:
+        //      1.0 means 100% of current device screen width
+        //      0.8 means 80%
+        float[] widths = {0.8f, 1.0f};
+
+        // this forces children to size
+        panesController.sizeViews(widths);
+
+        // this sets current pane
+        panesController.scrollToPaneIndexInstant(1);
+    }
+
+    private void initListContents() {
+        String[] values = new String[] {
+                "Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
+                "Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
+                "Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
+                "Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
+                "Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
+                "Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
+                "Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
+                "Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
+        };
+
+        MySecondViewArrayAdapter myadapter = new MySecondViewArrayAdapter(this, values);
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, android.R.id.text1, values);
+        listView.setAdapter(myadapter);
+    }
+
+    private void initNavigationBar() {
         navigationBar.setTitleText("Hello");
 //        navigationBar.createBackButton(new View.OnClickListener() {
 //            @Override
@@ -36,34 +79,14 @@ public class SecondActivity extends Activity implements iNavigationBarCallback {
         navigationBar.setDelegate(this);
         navigationBar.createBackButton();
 
-        Button btn = navigationBar.createCustomButton("test lala", new View.OnClickListener() {
+        Button btn = navigationBar.createCustomButton("Menu", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                panesController.scrollToPaneIndex(0, 200);
             }
         });
         navigationBar.getRightPane().addView(btn);
-
-		String[] values = new String[] { 
-				"Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
-				"Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
-				"Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
-				"Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
-				"Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
-				"Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
-				"Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
-				"Lala", "Android", "iPhone", "Lala", "Android", "iPhone",
-		};
-
-		MySecondViewArrayAdapter myadapter = new MySecondViewArrayAdapter(this, values);
-//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, android.R.id.text1, values);
-		listView.setAdapter(myadapter);
-
-
-//		NavigationBar navigationBar = (NavigationBar) LayoutInflater.from(this).inflate(R.layout.navigation_bar, null);
-//        parent.addView(navigationBar);
-
-	}
+    }
 
     private void overridePendingBackTransitionAnimation() {
         overridePendingTransition(R.anim.transition_left_in, R.anim.transition_right_out);
@@ -79,5 +102,9 @@ public class SecondActivity extends Activity implements iNavigationBarCallback {
     public void onNavigationBarBackClick(Button button) {
         finish();
         overridePendingBackTransitionAnimation();
+    }
+
+    public void menuCloseButton(View button) {
+        panesController.scrollToPaneIndex(1, 200);
     }
 }
